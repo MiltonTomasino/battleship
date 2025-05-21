@@ -4,15 +4,26 @@ import { Player } from "./classes";
 let player1Board = document.querySelector(".player1");
 let player2Board = document.querySelector(".player2");
 
-function createGridElement(index, row, col) {
+function createGridElement(row, col, isPlayer1 = false) {
     let div = document.createElement("div");
     div.classList.add("grid-element");
     div.classList.add(`${row}-${col}`);
 
-    div.addEventListener("click", () => {
-        console.log(div.classList[1]);
-        
-    })
+    if (isPlayer1) {
+        div.addEventListener("click", () => {
+            let data = div.classList[1].split("-");
+            let rowData = parseInt(data[0]);
+            let colData = parseInt(data[1]);
+            console.log(`row: ${rowData}, col: ${colData}`);
+            const result = player1.attack(player2, rowData, colData);
+
+            console.log(`Player1 attacked [${rowData}, ${colData}]: ${result}`)
+
+            if (result === "hit") div.classList.add("hit");
+            else if (result === "missed") div.classList.add("miss");
+
+        })
+    }
 
     return div;
 }
@@ -22,9 +33,9 @@ for (let i = 0; i < 100; i++) {
     let row = Math.floor(i / 10);
     let col = i % 10;
 
-    let div1 = createGridElement(i, row, col);
+    let div1 = createGridElement(row, col);
 
-    let div2 = createGridElement(i, row, col);
+    let div2 = createGridElement(row, col, true);
 
     player1Board.appendChild(div1);
     player2Board.appendChild(div2);

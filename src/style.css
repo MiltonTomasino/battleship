@@ -27,3 +27,11 @@
 .grid-element {
     outline: 1px solid green;
 }
+
+.hit {
+    background-color: red;
+}
+
+.miss {
+    background-color: blue;
+}
