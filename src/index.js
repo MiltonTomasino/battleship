@@ -4,18 +4,27 @@ import { Player } from "./classes";
 let player1Board = document.querySelector(".player1");
 let player2Board = document.querySelector(".player2");
 
+function createGridElement(index, row, col) {
+    let div = document.createElement("div");
+    div.classList.add("grid-element");
+    div.classList.add(`${row}-${col}`);
+
+    div.addEventListener("click", () => {
+        console.log(div.classList[1]);
+        
+    })
+
+    return div;
+}
+
 for (let i = 0; i < 100; i++) {
 
     let row = Math.floor(i / 10);
     let col = i % 10;
 
-    let div1 = document.createElement("div");
-    div1.classList.add("grid-element");
-    div1.classList.add(`${row}-${col}`);
+    let div1 = createGridElement(i, row, col);
 
-    let div2 = document.createElement("div");
-    div2.classList.add("grid-element");
-    div2.classList.add(`${row}-${col}`);
+    let div2 = createGridElement(i, row, col);
 
     player1Board.appendChild(div1);
     player2Board.appendChild(div2);
