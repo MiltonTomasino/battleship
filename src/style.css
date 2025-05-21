@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    /* margin-top: 10%; */
+    padding-top: 50px;
+    outline: 2px solid red;
+    height: 100vh;
+
+    display: flex;
+    justify-content: space-around;
+}
+
+.player1, .player2 {
+
+    outline: 2px solid black;
+    height: 500px;
+    width: 500px;
+
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.grid-element {
+    outline: 1px solid green;
+}
