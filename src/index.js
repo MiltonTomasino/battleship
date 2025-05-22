@@ -4,26 +4,26 @@ import { Player } from "./classes";
 let player1Board = document.querySelector(".player1");
 let player2Board = document.querySelector(".player2");
 
+let player1 = new Player("Jonathan");
+let player2 = new Player("Bot", "Computer");
+
+let gameStart = false;
+let isPlaceingShips = false;
+let currentTurn = "player1";
+let currShipLength = 3;
+let isHorizontal = true;
+
 function createGridElement(row, col, isPlayer1 = false) {
     let div = document.createElement("div");
     div.classList.add("grid-element");
-    div.classList.add(`${row}-${col}`);
+    
+    div.dataset.row = row;
+    div.dataset.col = col;
 
-    if (isPlayer1) {
-        div.addEventListener("click", () => {
-            let data = div.classList[1].split("-");
-            let rowData = parseInt(data[0]);
-            let colData = parseInt(data[1]);
-            console.log(`row: ${rowData}, col: ${colData}`);
-            const result = player1.attack(player2, rowData, colData);
-
-            console.log(`Player1 attacked [${rowData}, ${colData}]: ${result}`)
-
-            if (result === "hit") div.classList.add("hit");
-            else if (result === "missed") div.classList.add("miss");
-
-        })
-    }
+    div.addEventListener("click", () => {
+        console.log(`row: ${row}, col: ${col}`);
+        
+    })
 
     return div;
 }
@@ -42,12 +42,7 @@ for (let i = 0; i < 100; i++) {
 }
 
 
-
-let player1 = new Player("Jonathan");
-let player2 = new Player("Bot", "Computer");
-
-
-player1.gameboard.placeShip(0, 0, 3);
+// player1.gameboard.placeShip(0, 0, 3);
 player2.gameboard.placeShip(5, 5, 4);
 
 
