@@ -13,16 +13,31 @@ let currentTurn = "player1";
 let currShipLength = 3;
 let isHorizontal = true;
 
-function createGridElement(row, col, isPlayer1 = false) {
+function createGridElement(row, col, isPlayer1 = true) {
     let div = document.createElement("div");
-    div.classList.add("grid-element");
+    let className = isPlayer1 ? "grid-element1" : "grid-element2";
+    div.classList.add(className);
     
     div.dataset.row = row;
     div.dataset.col = col;
 
     div.addEventListener("click", () => {
         console.log(`row: ${row}, col: ${col}`);
-        
+        if (currentTurn === "player1" && !gameStart) {
+            const res = player1.gameboard.placeShip(row, col, currShipLength)
+
+            if (!res) {
+                return;
+            }
+
+            for (let i = 0; i < currShipLength; i++) {
+                let posX = isHorizontal ? row : row + i;
+                let posY = isHorizontal ? col + i : col;
+                let cell = document.querySelector(`[data-row="${posX}"][data-col="${posY}"]`);
+                cell.classList.add("ship");
+            }
+
+        }
     })
 
     return div;
@@ -35,7 +50,7 @@ for (let i = 0; i < 100; i++) {
 
     let div1 = createGridElement(row, col);
 
-    let div2 = createGridElement(row, col, true);
+    let div2 = createGridElement(row, col, false);
 
     player1Board.appendChild(div1);
     player2Board.appendChild(div2);

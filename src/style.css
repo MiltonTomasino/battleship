@@ -24,8 +24,20 @@
     grid-template-columns: repeat(10, 1fr);
 }
 
-.grid-element {
-    outline: 1px solid green;
+.grid-element1, .grid-element2 {
+    outline: 1px solid black;
+}
+
+.grid-element1:hover {
+    background-color: rgb(211, 211, 211);
+}
+
+.grid-element2 {
+    background-color: gray;
+}
+
+.grid-element2:hover {
+    background-color: rgb(179, 179, 179);
 }
 
 .hit {

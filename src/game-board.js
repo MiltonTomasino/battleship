@@ -10,12 +10,27 @@ let GameBoard = () => {
     }
 
     function placeShip(x, y, length, isHorizontal = true) {
+
+        for (let i = 0; i < length; i++) {
+            let posX = isHorizontal ? x : x + i;
+            let posY = isHorizontal ? y + i : y;
+
+            if (posX >= 10 || posY >= 10) {
+                console.warn("Ship goes out of bounds. Cannot place.");
+                return false;
+            }
+            if (board[posX][posY] !== 0) {
+                console.warn("Ship overlaps with another. Cannot place.");
+                return false;
+            }
+        }
+
         const ship = new Ship(length);
         ships.push({ ship, coordinates: [] });
 
         for (let i = 0; i < length; i++) {
-            let posX = isHorizontal ? x + i : x;
-            let posY = isHorizontal ? y : y + i;
+            let posX = isHorizontal ? x : x + i;
+            let posY = isHorizontal ? y + i : y;
             board[posX][posY] = ship;
             ships[ships.length - 1].coordinates.push([posX, posY]);
         }
