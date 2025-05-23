@@ -8,7 +8,6 @@
     /* margin-top: 10%; */
     padding-top: 50px;
     outline: 2px solid red;
-    height: 100vh;
 
     display: flex;
     justify-content: space-around;
@@ -29,7 +28,7 @@
 }
 
 .grid-element1:hover {
-    background-color: rgb(211, 211, 211);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .grid-element2 {
@@ -37,10 +36,10 @@
 }
 
 .grid-element2:hover {
-    background-color: rgb(179, 179, 179);
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
-.hit {
+.ship.hit, .grid-element2.hit {
     background-color: red;
 }
 

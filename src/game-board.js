@@ -4,6 +4,7 @@ let GameBoard = () => {
     let board = Array.from({ length: 10 }, () => Array(10).fill(0));
     let ships = [];
     let missedShots = [];
+    let hitShots = new Set();
 
     function clearBoard(player) {
 
@@ -43,14 +44,19 @@ let GameBoard = () => {
         if (x < 0 || x >= 10 || y < 0 || y >= 10) {
             return "invalid";
         }
+
+        const coordKey = `${x},${y}`;
+        if (hitShots.has(coordKey)) return "already-hit";
         
         const target = board[x][y];
 
         if (target !== 0 && typeof target.hit === "function") {
             target.hit();
+            hitShots.add(coordKey);
             return "hit";
         } else {
             missedShots.push([x, y]);
+            hitShots.add(coordKey);
             return "missed";
         }
     }
